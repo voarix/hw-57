@@ -28,8 +28,12 @@ const UserForm: React.FC<Props> = ({ onSubmitFormToAddUser }) => {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmitFormToAddUser({ id: String(new Date().toISOString()), ...form });
-    setForm(initialUserForm);
+    if (form.role !== "" && form.email !== "" && form.name !== "") {
+      onSubmitFormToAddUser({ id: String(new Date().toISOString()), ...form });
+      setForm(initialUserForm);
+    } else {
+      alert("Пожалуйста, заполните все поля ");
+    }
   };
   return (
     <form onSubmit={onSubmit}>
