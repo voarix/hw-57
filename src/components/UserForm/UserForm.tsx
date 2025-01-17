@@ -6,12 +6,14 @@ interface Props {
 }
 
 const UserForm: React.FC<Props> = ({ onSubmitFormToAddUser }) => {
-  const [form, setForm] = useState<UserMutation>({
+  const initialUserForm: UserMutation = {
     name: "",
     email: "",
     role: "",
     active: false,
-  });
+  };
+
+  const [form, setForm] = useState<UserMutation>(initialUserForm);
 
   const inputChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -27,6 +29,7 @@ const UserForm: React.FC<Props> = ({ onSubmitFormToAddUser }) => {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmitFormToAddUser({ id: String(new Date().toISOString()), ...form });
+    setForm(initialUserForm);
   };
   return (
     <form onSubmit={onSubmit}>

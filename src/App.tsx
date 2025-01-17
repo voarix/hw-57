@@ -2,7 +2,7 @@ import "./App.css";
 import UserForm from "./components/UserForm/UserForm.tsx";
 import { useState } from "react";
 import { User } from "./types";
-import UserItem from "./components/UserItem/UserItem.tsx";
+import Users from "./components/Users/Users.tsx";
 
 const App = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -20,9 +20,7 @@ const App = () => {
             <UserForm onSubmitFormToAddUser={onAddUser} />
           </div>
           <div className="col-6">
-            {users.map((user) => (
-              <UserItem key={user.id} user={user} />
-            ))}
+            <Users users={users} />
           </div>
         </div>
       </div>
