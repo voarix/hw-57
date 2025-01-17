@@ -5,31 +5,32 @@ interface Props {
   onSubmitFormToAddUser: (newUser: User) => void;
 }
 
-const UserForm: React.FC<Props> = ({onSubmitFormToAddUser}) => {
-
+const UserForm: React.FC<Props> = ({ onSubmitFormToAddUser }) => {
   const [form, setForm] = useState<UserMutation>({
-    name: '',
-    email: '',
-    role: '',
+    name: "",
+    email: "",
+    role: "",
     active: false,
   });
 
-  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const inputChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     const { name, value } = e.target;
-    setForm(prevState => ({ ...prevState, [name]: value }));
+    setForm((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const checkBox = () => {
-    setForm(prevState => ({...prevState, active: !prevState.active}));
+    setForm((prevState) => ({ ...prevState, active: !prevState.active }));
   };
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmitFormToAddUser({id: String(new Date().toISOString()) ,...form});
+    onSubmitFormToAddUser({ id: String(new Date().toISOString()), ...form });
   };
   return (
     <form onSubmit={onSubmit}>
-      <div className="form-group">
+      <div className="form-group mt-3">
         <label htmlFor="name">Name</label>
         <input
           type="text"
@@ -42,7 +43,7 @@ const UserForm: React.FC<Props> = ({onSubmitFormToAddUser}) => {
         />
       </div>
 
-      <div className="form-group">
+      <div className="form-group mt-3">
         <label htmlFor="email">Email</label>
         <input
           type="text"
@@ -55,9 +56,15 @@ const UserForm: React.FC<Props> = ({onSubmitFormToAddUser}) => {
         />
       </div>
 
-      <div className="form-group">
+      <div className="form-group mt-3">
         <label htmlFor="role">Role</label>
-        <select name="role" id="role" value={form.role} onChange={inputChangeHandler} className="form-control">
+        <select
+          name="role"
+          id="role"
+          value={form.role}
+          onChange={inputChangeHandler}
+          className="form-control"
+        >
           <option value="" disabled>
             Выберите роль
           </option>
@@ -67,7 +74,7 @@ const UserForm: React.FC<Props> = ({onSubmitFormToAddUser}) => {
         </select>
       </div>
 
-      <div className="form-group mt-2">
+      <div className="form-group mt-3">
         <label htmlFor="active">Is active: </label>
         <input
           type="checkbox"
@@ -79,7 +86,7 @@ const UserForm: React.FC<Props> = ({onSubmitFormToAddUser}) => {
         />
       </div>
 
-      <button type="submit" className="btn btn-primary mt-2">
+      <button type="submit" className="btn btn-primary mt-3">
         Send
       </button>
     </form>
